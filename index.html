@@ -1,137 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Cards</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
 
-        .contact-card {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 10px;
-            width: 300px;
-            display: inline-block;
-            box-shadow: 2px 2px 5px #888;
-            border-radius: 5px;
-            text-align: center;
-        }
+      .contact-card {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px;
+        width: 300px;
+        display: inline-block;
+        box-shadow: 2px 2px 5px #888;
+        border-radius: 5px;
+        text-align: center;
+      }
 
-        .contact-image {
-            max-width: 100%;
-        }
+      .contact-image {
+        max-width: 100%;
+      }
 
-        #contact-form {
-            margin-top: 20px;
-            text-align: center;
-        }
+      #contact-form {
+        margin-top: 20px;
+        text-align: center;
+      }
 
-        #contact-form input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
+      #contact-form input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
 
-        #contact-form input[type="url"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
+      #contact-form input[type="url"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
 
-
-        #contact-form button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
+      #contact-form button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
     <template id="contact-card">
-        <div class="contact-card">
-            <img class="contact-image" src="" alt="Contact Image">
-            <h3 class="contact-name"></h3>
-            <p class="contact-email"></p>
-            <p class="contact-phone"></p>
-        </div>
+      <div class="contact-card">
+        <img class="contact-image" src="" alt="Contact Image" />
+        <h3 class="contact-name"></h3>
+        <p class="contact-email"></p>
+        <p class="contact-phone"></p>
+      </div>
     </template>
 
     <div id="contact-container"></div>
 
     <div id="contact-form">
-        <h2>Add a New Contact</h2>
-        <input type="text" id="name" placeholder="Name">
-        <input type="text" id="email" placeholder="Email">
-        <input type="text" id="phone" placeholder="Phone">
-        <input type="url" id="image" placeholder="Image">
-        <button id="add-contact-button">Add Contact</button>
+      <h2>Add a New Contact</h2>
+      <input type="text" id="name" placeholder="Name" />
+      <input type="text" id="email" placeholder="Email" />
+      <input type="text" id="phone" placeholder="Phone" />
+      <input type="url" id="image" placeholder="Image" />
+      <button id="add-contact-button">Add Contact</button>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            function createContactCard(contactData) {
-                const template = document.getElementById('contact-card');
-                const cardClone = document.importNode(template.content, true);
+      document.addEventListener("DOMContentLoaded", function () {
+        function createContactCard(contactData) {
+          const template = document.getElementById("contact-card");
+          const cardClone = document.importNode(template.content, true);
 
-                cardClone.querySelector('.contact-image').src = contactData.image;
-                cardClone.querySelector('.contact-name').textContent = contactData.name;
-                cardClone.querySelector('.contact-email').textContent = `Email: ${contactData.email}`;
-                cardClone.querySelector('.contact-phone').textContent = `Phone: ${contactData.phone}`;
-                
-                const cardElement = document.createElement('div');
-                cardElement.appendChild(cardClone);
+          cardClone.querySelector(".contact-image").src = contactData.image;
+          cardClone.querySelector(".contact-name").textContent =
+            contactData.name;
+          cardClone.querySelector(
+            ".contact-email"
+          ).textContent = `Email: ${contactData.email}`;
+          cardClone.querySelector(
+            ".contact-phone"
+          ).textContent = `Phone: ${contactData.phone}`;
 
-                return cardElement;
-            }
+          const cardElement = document.createElement("div");
+          cardElement.appendChild(cardClone);
 
-            const contactContainer = document.getElementById('contact-container');
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const phoneInput = document.getElementById('phone');
-            const imageinput = document.getElementById('image')
-            const addButton = document.getElementById('add-contact-button');
-            
+          return cardElement;
+        }
 
-            function addContact() {
-                const name = nameInput.value;
-                const email = emailInput.value;
-                const phone = phoneInput.value;
-                const image = imageinput.value
+        const contactContainer = document.getElementById("contact-container");
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const phoneInput = document.getElementById("phone");
+        const imageinput = document.getElementById("image");
+        const addButton = document.getElementById("add-contact-button");
 
-                if (name && email && phone) {
-                    const contact = {
-                        name,
-                        email,
-                        phone,
-                        image,
-                    };
+        function addContact() {
+          const name = nameInput.value;
+          const email = emailInput.value;
+          const phone = phoneInput.value;
+          const image = imageinput.value;
 
-                    const card = createContactCard(contact);
-                    contactContainer.appendChild(card);
+          if (name && email && phone) {
+            const contact = {
+              name,
+              email,
+              phone,
+              image,
+            };
 
-                    // Очистка полей ввода после добавления контакта
-                    nameInput.value = '';
-                    emailInput.value = '';
-                    phoneInput.value = '';
-                    imageinput.value = '';
+            const card = createContactCard(contact);
+            contactContainer.appendChild(card);
 
-                } else {
-                    alert('Please fill in all fields');
-                }
-            }
+            // Очистка полей ввода после добавления контакта
+            nameInput.value = "";
+            emailInput.value = "";
+            phoneInput.value = "";
+            imageinput.value = "";
+          } else {
+            alert("Please fill in all fields");
+          }
+        }
 
-            addButton.addEventListener('click', addContact);
-        });
+        addButton.addEventListener("click", addContact);
+      });
     </script>
-</body>
+  </body>
 </html>
